@@ -17,7 +17,7 @@
             <view bindtap='gotoBindUser' style='color:orange'>尚未绑定SSO通行证，点此绑定！</view>
           </block>
           <block wx:else>
-            {{SSONickName}}，欢迎回来！
+            {{SSONickName}}，欢迎回来！<text bindtap='cancelBind'>(取消绑定)</text>
           </block>
         </view>
       </view>

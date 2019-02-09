@@ -60,9 +60,12 @@ Page({
     }
   },
 
+
   onShow: function() {
+    this.checkHasBindUser();
     this.onLoad();
   },
+
 
   getUserInfo: function(e) {
     console.log(e)
@@ -75,11 +78,96 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+    this.checkHasBindUser();
+    this.onLoad();
   },
+
 
   gotoBindUser: function() {
     wx.navigateTo({
       url: '/pages/SSOScanLogin/bindUser',
+    })
+  },
+
+
+  cancelBind: function() {
+    var _this = this;
+
+    wx.showModal({
+      title: '温馨提醒',
+      content: '确认要取消绑定SSO通行证吗？',
+      success(res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.apiUrl + "cancelBindUser",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+              'openId': wx.getStorageSync('openId')
+            },
+            method: "post",
+            dataType: 'json',
+            success: ret => {
+              var ret = ret.data;
+              if (ret.code == 200) {
+                wx.clearStorageSync('SSOUnionId');
+                wx.clearStorageSync('SSONickName');
+
+                _this.setData({
+                  hasBindUser: false,
+                  SSONickName: ''
+                });
+              } else {
+                wx.showModal({
+                  title: '系统提示',
+                  content: '取消绑定失败！',
+                  showCancel: false
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          return;
+        }
+      }
+    })
+  },
+
+
+  checkHasBindUser: function() {
+    var _this = this;
+
+    wx.request({
+      url: app.globalData.apiUrl + "checkHasBindUser",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        'openId': wx.getStorageSync('openId')
+      },
+      dataType: 'json',
+      success: ret => {
+        var ret = ret.data;
+        if (ret.code == 200) {
+          var unionId = ret.data['unionId'];
+          var nickName = ret.data['nickName'];
+
+          wx.setStorageSync('SSOUnionId', unionId);
+          wx.setStorageSync('SSONickName', nickName);
+
+          _this.setData({
+            hasBindUser: true,
+            SSONickName: nickName
+          });
+        } else if (ret.code != 403) {
+          wx.showModal({
+            title: '系统提示',
+            content: '检查绑定用户状态失败！',
+            showCancel: false
+          })
+        }
+      }
     })
   }
 })
