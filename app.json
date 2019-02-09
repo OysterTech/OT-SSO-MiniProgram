@@ -1,0 +1,36 @@
+{
+	"pages": [
+		"pages/SSOScanLogin/index",
+		"pages/user/index",
+		"pages/SSOScanLogin/auth",
+		"pages/SSOScanLogin/bindUser",
+		"pages/include/footer"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "",
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "white"
+	},
+	"tabBar": {
+		"color": "#aaa",
+		"selectedColor": "#39b54a",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/SSOScanLogin/index",
+				"iconPath": "/image/tabbar/basics.png",
+				"selectedIconPath": "/image/tabbar/basics_cur.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/user/index",
+				"iconPath": "/image/tabbar/user.png",
+				"selectedIconPath": "/image/tabbar/user_cur.png",
+				"text": "用户"
+			}
+		]
+	}
+}

@@ -1,0 +1,32 @@
+<view class='cu-custom' style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class='content'>生蚝科技</view>
+  </view>
+</view>
+<view class="margin-xl padding-xl bg-white radius shadow-lg">
+  <view class="flex justify-center">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
+    <block wx:else>
+      <view class='text-center'>
+        <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})"></view>
+        <view class="text-grey text-xl">
+          <text>
+						{{userInfo.nickName}}\n\n
+					</text>
+          <block wx:if="{{!hasBindUser}}">
+            <view bindtap='gotoBindUser' style='color:orange'>尚未绑定SSO通行证，点此绑定！</view>
+          </block>
+          <block wx:else>
+            {{SSONickName}}，欢迎回来！
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+
+<view class="text-center margin-top">
+  <text class="text-grey text-xl">{{motto}}</text>
+</view>
+
+<include src="/pages/include/footer" />

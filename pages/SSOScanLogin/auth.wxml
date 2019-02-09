@@ -1,0 +1,37 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='icon-back'></text> 扫码登录
+    </navigator>
+  </view>
+</view>
+
+<view class="margin-xl padding-xl bg-white radius shadow-lg">
+  <view class="flex justify-center">
+    <view class='text-center'>
+      <view class="padding text-grey text-xl">您正在授权登录：{{appName}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="padding-xl">
+  <button class='cu-btn block bg-green margin-tb-sm lg' bindtap='toLogin' loading='{{loading}}' disabled='{{loading}}'> 确认登录</button>
+  <button class='cu-btn block bg-orange margin-tb-sm lg' bindtap='cancelLogin'> 取消授权</button>
+</view>
+
+<view class="cu-modal {{showBindModal==true?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class='content'>绑定通行证提醒</view>\
+    </view>
+    <view class='padding-xl' style='font-size:40rpx;'>
+      当前微信用户暂未绑定SSO通行证，请点击按钮去绑定
+    </view>
+    <view class="cu-bar">
+      <view class='action margin-0 flex-sub text-red solid-left' bindtap='cancelLogin'>取消</view>
+      <view class='action margin-0 flex-sub text-green solid-left' bindtap='gotoBindUser'>去绑定 ＞</view>
+    </view>
+  </view>
+</view>
+
+<include src="/pages/include/footer" />

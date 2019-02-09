@@ -1,0 +1,24 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;padding-bottom:80px;">
+  <view class="cu-bar fixed gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='icon-back'></text> 绑定SSO通行证
+    </navigator>
+  </view>
+</view>
+
+<form bindsubmit='toBindUser'>
+  <view class="cu-form-group">
+    <view class='title'>通行证用户名</view>
+    <input placeholder="请输入用户名" class='radius' name='userName' confirm-type='next'></input>
+  </view>
+	<view class="cu-form-group">
+    <view class='title'>通行证密码</view>
+    <input placeholder="请输入通行证密码" class='radius' name='password' password='true'></input>
+  </view>
+
+	<text>\r\n</text>
+
+	<button class='flex cu-btn bg-green lg' form-type="submit" disabled='{{loading}}' loading='{{loading}}'>确认绑定 ＞</button>
+</form>
+
+<include src="/pages/include/footer" />
