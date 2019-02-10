@@ -7,7 +7,6 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    ColorList: app.globalData.ColorList,
     loading: false,
     ticket: "",
     appName: "",
@@ -24,6 +23,7 @@ Page({
       ticket: options.scene
     })
 
+		// 检查是否已绑定通行证
 		var openId = wx.getStorageSync('openId');
 		if (openId != "") {
       _this.setData({
@@ -36,6 +36,7 @@ Page({
     }
 
     if (this.data.showBindModal !== true) {
+			// 发送已扫描状态请求
       wx.request({
         url: app.globalData.apiUrl + "handler",
         header: {
@@ -88,6 +89,7 @@ Page({
       })
     }
   },
+
 
   toLogin: function() {
     var _this = this;
@@ -148,6 +150,13 @@ Page({
     })
   },
 
+
+	onUnload:function(){
+		// 点击导航栏返回，取消登录
+		this.cancelLogin();
+	},
+
+
   cancelLogin: function() {
     var ticket = this.data.ticket;
     wx.request({
@@ -166,6 +175,7 @@ Page({
       }
     })
   },
+	
 
 	gotoBindUser:function(){
 		wx.navigateTo({

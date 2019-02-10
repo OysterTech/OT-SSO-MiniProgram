@@ -1,0 +1,14 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;padding-top:80px;">
+  <view class="cu-bar fixed gradual-orange" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='icon-back'></text> 扫码登录记录列表
+    </navigator>
+  </view>
+</view>
+
+<view class="text-center margin-top">
+  <text class='text-green text-xl'>
+		功能正在开发中，敬请期待！\n\n
+		Under development, please look forward to it.
+	</text>
+</view>

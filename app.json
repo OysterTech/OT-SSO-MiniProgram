@@ -4,7 +4,18 @@
 		"pages/user/index",
 		"pages/SSOScanLogin/auth",
 		"pages/SSOScanLogin/bindUser",
-		"pages/include/footer"
+		"pages/include/footer",
+		"pages/user/SSOUserInfo",
+		"pages/function/index"
+	],
+	"subpackages": [
+		{
+			"name":"loginLog",
+			"root": "subpackage/loginLog",
+			"pages": [
+				"pages/list"
+			]
+		}
 	],
 	"window": {
 		"backgroundTextStyle": "light",
@@ -15,20 +26,26 @@
 	},
 	"tabBar": {
 		"color": "#aaa",
-		"selectedColor": "#39b54a",
+		"selectedColor": "#1296db",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [
 			{
 				"pagePath": "pages/SSOScanLogin/index",
-				"iconPath": "/image/tabbar/basics.png",
-				"selectedIconPath": "/image/tabbar/basics_cur.png",
+				"iconPath": "/image/tabbar/home.png",
+				"selectedIconPath": "/image/tabbar/home_select.png",
 				"text": "首页"
+			},
+			{
+				"pagePath": "pages/function/index",
+				"iconPath": "/image/tabbar/function.png",
+				"selectedIconPath": "/image/tabbar/function_select.png",
+				"text": "功能"
 			},
 			{
 				"pagePath": "pages/user/index",
 				"iconPath": "/image/tabbar/user.png",
-				"selectedIconPath": "/image/tabbar/user_cur.png",
+				"selectedIconPath": "/image/tabbar/user_select.png",
 				"text": "用户"
 			}
 		]

@@ -1,0 +1,11 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;padding-top:80px;">
+  <view class="cu-bar fixed gradual-orange" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <text class='action'>功能列表</text>
+  </view>
+</view>
+
+<navigator hover-class='none' url="/subpackage/loginLog/pages/list" class="nav-li bg-green" style='animation: show 1.2s 1;-webkit-animation: show 1.2s 1;'>
+  <view class="nav-title">扫码登录记录</view>
+  <view class="nav-name">Scan Login Log List</view>
+  <text class='icon-list'></text>
+</navigator>

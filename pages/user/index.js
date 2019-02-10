@@ -1,5 +1,3 @@
-//index.js
-//获取应用实例
 const app = getApp()
 
 Page({
@@ -62,7 +60,9 @@ Page({
 
 
   onShow: function() {
-    this.checkHasBindUser();
+    if (wx.getStorageSync('SSOUnionId') == "") {
+      this.checkHasBindUser();
+    }
     this.onLoad();
   },
 
@@ -111,13 +111,19 @@ Page({
             success: ret => {
               var ret = ret.data;
               if (ret.code == 200) {
-                wx.clearStorageSync('SSOUnionId');
-                wx.clearStorageSync('SSONickName');
+								wx.removeStorageSync('SSOUnionId');
+								wx.removeStorageSync('SSONickName');
 
                 _this.setData({
                   hasBindUser: false,
                   SSONickName: ''
                 });
+								wx.showToast({
+									title: '成功取消绑定！',
+									icon: 'success',
+									mask: true,
+									duration: 2000
+								})
               } else {
                 wx.showModal({
                   title: '系统提示',
@@ -139,7 +145,7 @@ Page({
     var _this = this;
 
     wx.request({
-      url: app.globalData.apiUrl + "checkHasBindUser",
+      url: app.globalData.apiUrl + "getUserInfo",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
@@ -150,11 +156,12 @@ Page({
       success: ret => {
         var ret = ret.data;
         if (ret.code == 200) {
-          var unionId = ret.data['unionId'];
-          var nickName = ret.data['nickName'];
+          var unionId = ret.data['userInfo']['unionId'];
+          var nickName = ret.data['userInfo']['nickName'];
 
           wx.setStorageSync('SSOUnionId', unionId);
           wx.setStorageSync('SSONickName', nickName);
+          wx.setStorageSync('SSOUserInfo', ret.data['userInfo']);
 
           _this.setData({
             hasBindUser: true,
@@ -168,6 +175,13 @@ Page({
           })
         }
       }
+    })
+  },
+
+
+  showInfo: function() {
+    wx.navigateTo({
+      url: '/pages/user/SSOUserInfo',
     })
   }
 })

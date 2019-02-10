@@ -3,6 +3,7 @@
     <view class='content'>生蚝科技</view>
   </view>
 </view>
+
 <view class="margin-xl padding-xl bg-white radius shadow-lg">
   <view class="flex justify-center">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
@@ -10,14 +11,13 @@
       <view class='text-center'>
         <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})"></view>
         <view class="text-grey text-xl">
-          <text>
-						{{userInfo.nickName}}\n\n
-					</text>
           <block wx:if="{{!hasBindUser}}">
-            <view bindtap='gotoBindUser' style='color:orange'>尚未绑定SSO通行证，点此绑定！</view>
+            <text bindtap='gotoBindUser' style='color:orange'>\n尚未绑定SSO通行证，点此绑定！</text>
           </block>
           <block wx:else>
-            {{SSONickName}}，欢迎回来！<text bindtap='cancelBind'>(取消绑定)</text>
+						<text>\n</text>
+            <text bindtap='showInfo' class='text-green'>{{SSONickName}}</text>，欢迎回来！<text bindtap='cancelBind' class='text-red'>(取消绑定)</text>
+						<text class='text-df'>\n\n(点击用户名可显示用户资料)</text>
           </block>
         </view>
       </view>

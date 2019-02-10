@@ -1,8 +1,6 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
   <view class="cu-bar fixed gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-    <view class='action' open-type="navigateBack" delta="1" hover-class="none">
-      <!--text class='icon-back'></text-->扫码登录
-    </view>
+    <view class='action'>扫码登录</view>
   </view>
 </view>
 

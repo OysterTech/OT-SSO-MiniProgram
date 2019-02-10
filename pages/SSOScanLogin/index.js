@@ -8,7 +8,6 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    ColorList: app.globalData.ColorList,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
     showAuthModal: false
@@ -121,5 +120,13 @@ Page({
     this.setData({
       showAuthModal: false
     })
-  }
+  },
+
+
+	onShareAppMessage() {
+		return {
+			title: '生蚝科技统一身份认证平台扫码登录',
+			path: '/pages/SSOScanLogin/index'
+		}
+	}
 })

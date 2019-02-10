@@ -12,7 +12,7 @@
   color: #666;
   padding: 30rpx;
   border-radius: 12rpx;
-  width: 45%;
+  width: 95%;
   margin: 0 2.5% 40rpx;
   background-image: url(https://image.weilanwl.com/color2.0/cardBg.png);
   background-size: cover;
@@ -42,12 +42,12 @@
 }
 
 .nav-title {
-  font-size: 32rpx;
-  font-weight: 300;
+  font-size: 37rpx;
+  font-weight: bold;
 }
 
 .nav-title::first-letter {
-  font-size: 40rpx;
+  font-size: 42rpx;
   margin-right: 4rpx;
 }
 
@@ -84,7 +84,7 @@
 
 .nav-name::first-letter {
   font-weight: bold;
-  font-size: 36rpx;
+  font-size: 34rpx;
   margin-right: 1px;
 }
 
