@@ -4,20 +4,38 @@
   </view>
 </view>
 
-<view class="margin-xl padding-xl bg-white radius shadow-lg">
-  <view class="flex justify-center">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
+<view class='margin-xl bg-white radius shadow-lg {{toggleDelay?"animation-slide-bottom":""}}' style='animation-delay:0.1s;'>
+	<text>\n</text>
+  <view class="justify-center text-center">
+
+    <block wx:if="{{!hasUserInfo && canIUse}}">
+			<button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn lg bg-green shadow'><text class="icon-my text-white"> 获取头像昵称 </text></button>
+			<text>\n\n</text>
+		</block>
+
     <block wx:else>
       <view class='text-center'>
         <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})"></view>
         <view class="text-grey text-xl">
+
           <block wx:if="{{!hasBindUser}}">
-            <text bindtap='gotoBindUser' style='color:orange'>\n尚未绑定SSO通行证，点此绑定！</text>
+            <text bindtap='gotoBindUser' style='color:orange'>\n尚未绑定SSO通行证，点此绑定！\n\n</text>
           </block>
+
           <block wx:else>
-						<text>\n</text>
-            <text bindtap='showInfo' class='text-green'>{{SSONickName}}</text>，欢迎回来！<text bindtap='cancelBind' class='text-red'>(取消绑定)</text>
-						<text class='text-df'>\n\n(点击用户名可显示用户资料)</text>
+            <text>\n</text>
+            <text bindtap='showInfo' class='text-green'>{{SSONickName}}</text>，欢迎回来！\n
+
+            <form bindsubmit='cancelBind' report-submit="true">
+              <view class="flex">
+                <view class='flex-sub padding-sm margin-xs radius'>
+                  <button bindtap='showInfo' class='cu-btn bg-blue lg shadow'><text class="icon-profile text-white"> 查看资料</text></button>
+                </view>
+                <view class='flex-sub padding-sm margin-xs radius'>
+                  <button form-type='submit' class='cu-btn bg-red lg shadow'><text class="icon-exit text-white"> 取消绑定</text></button>
+                </view>
+              </view>
+            </form>
           </block>
         </view>
       </view>
@@ -25,8 +43,14 @@
   </view>
 </view>
 
-<view class="text-center margin-top">
+<view class='text-center margin-top {{toggleDelay?"animation-slide-bottom":""}}' style='animation-delay:0.3s;'>
   <text class="text-grey text-xl">{{motto}}</text>
 </view>
 
-<include src="/pages/include/footer" />
+<navigator hover-class='none' url="/pages/include/aboutUs" class='text-center margin-top {{toggleDelay?"animation-slide-bottom":""}}' style='animation-delay:0.44s;'>
+  <text class="text-grey text-xl">点击观看 生蚝科技の介绍 ></text>
+</navigator>
+
+<view class='{{toggleDelay?"animation-slide-bottom":""}}' style='animation-delay:0.45s;'>
+  <include src="/pages/include/footer" />
+</view>

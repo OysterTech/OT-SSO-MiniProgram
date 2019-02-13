@@ -1,0 +1,109 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;padding-top:80px;">
+  <view class="cu-bar fixed gradual-pink" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='icon-back'></text> 通行证用户资料
+    </navigator>
+  </view>
+</view>
+
+<!-- 公告 -->
+<view class="bg-orange padding col-1">
+  <text class='icon-warn text-white text-xl' style='line-height:25px;'> 如需修改资料/密码请点击修改按钮，无需修改的字段请忽略即可</text>
+</view>
+<!-- ./公告 -->
+
+<!-- 分割线 -->
+<view class="cu-progress margin-top xs">
+  <view class='bg-grey' style="width:100%;"></view>
+</view>
+<!-- ./分割线 -->
+
+<form bindsubmit='toEditUserInfo' report-submit="true">
+  <view class="cu-form-group margin-top">
+    <view class='title'>
+      <text class='icon-profile text-green'></text> 用户名
+    </view>
+    <input name="userName" value="{{userInfo['userName']}}" class='radius' disabled='{{editing?false:true}}'></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class='title'>
+      <text class='icon-peoplefill text-green'></text> 昵称
+    </view>
+    <input name="nickName" value="{{userInfo['nickName']}}" class='radius' disabled='{{editing?false:true}}'></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class='title'>
+      <text class='icon-mobilefill text-green'></text> 手机号
+    </view>
+    <input name="phone" type='number' value="{{userInfo['phone']}}" class='radius' disabled='{{editing?false:true}}'></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class='title'>
+      <text class='icon-mail text-green'></text> 邮箱
+    </view>
+    <input name="email" value="{{userInfo['email']}}" class='radius' disabled='{{editing?false:true}}'></input>
+  </view>
+
+  <view class="cu-form-group" style='display:{{editing?"none":""}}'>
+    <view class='title'>
+      <text class='icon-timefill text-green'></text> 注册时间
+    </view>
+    <input value="{{userInfo['createTime']}}" class='radius' disabled></input>
+  </view>
+
+  <view class="cu-form-group" style='display:{{editing?"none":""}}'>
+    <view class='title'>
+      <text class='icon-roundcheck text-green'></text> 最后登录时间
+    </view>
+    <input value="{{userInfo['lastLogin']}}" class='radius' disabled></input>
+  </view>
+
+  <text>\n</text>
+
+  <view class="cu-form-group" style='display:{{editing?"":"none"}}'>
+    <view class='title'>
+      <text class='icon-lock text-green'></text> 旧密码
+    </view>
+    <input name='oldPassword' type='password' class='radius'></input>
+  </view>
+  <view class="cu-form-group" style='display:{{editing?"":"none"}}'>
+    <view class='title'>
+      <text class='icon-ticket text-green'></text> 新密码
+    </view>
+    <input name='newPassword' type='password' class='radius'></input>
+  </view>
+  <view class="cu-form-group" style='display:{{editing?"":"none"}}'>
+    <view class='title'>
+      <text class='icon-warn text-green'></text> 确认新密码
+    </view>
+    <input name='surePassword' type='password' class='radius'></input>
+  </view>
+
+  <text>\n</text>
+
+  <button class='flex cu-btn bg-blue lg round shadow' style='display:{{editing?"none":""}}' bindtap='editUserInfo'>编 辑 资 料 / 密 码</button>
+
+  <view class="flex" style='display:{{editing?"":"none"}}'>
+		<!-- 放弃修改 -->
+    <view class='flex-sub padding-sm margin-xs radius'>
+      <navigator open-type="navigateBack">
+        <button class='flex cu-btn bg-cyan lg shadow' disabled='{{loading}}' loading='{{loading}}'>{{leftSymbol}} 放 弃 修 改</button>
+      </navigator>
+    </view>
+
+ 		<!-- 提交 -->
+   <view class='flex-sub padding-sm margin-xs radius'>
+      <button class='flex cu-btn bg-green lg shadow' form-type="submit" disabled='{{loading}}' loading='{{loading}}'>确 认 修 改 ></button>
+    </view>
+  </view>
+</form>
+
+<view class='cu-load load-modal' wx:if="{{loading}}"> 
+    <image src='/image/logo.jpg' class='png' mode='aspectFit'></image>
+    <view class='gray-text'>加载中</view>
+</view>
+
+<include src="/pages/include/footer" />

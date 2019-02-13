@@ -1,6 +1,28 @@
 @import "icon.wxss";
 @import "colorui.wxss";
 
+[class*=animation-] {
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both
+}
+
+.animation-slide-bottom {
+    animation-name: slide-bottom
+}
+
+@keyframes slide-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
 .nav-list {
   display: flex;
   flex-wrap: wrap;
@@ -44,11 +66,6 @@
 .nav-title {
   font-size: 37rpx;
   font-weight: bold;
-}
-
-.nav-title::first-letter {
-  font-size: 42rpx;
-  margin-right: 4rpx;
 }
 
 .nav-name {
@@ -139,5 +156,5 @@
 
 .footer-text {
     line-height: 20px;
-    font-size: 12px;
+    font-size: 15px;
 }

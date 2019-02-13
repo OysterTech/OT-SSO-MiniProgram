@@ -4,8 +4,18 @@
   </view>
 </view>
 
-<navigator hover-class='none' url="/subpackage/loginLog/pages/list" class="nav-li bg-green" style='animation: show 1.2s 1;-webkit-animation: show 1.2s 1;'>
+<navigator hover-class='none' url="/subpackage/loginLog/pages/list" class='nav-li bg-green shadow {{toggleDelay?"animation-slide-bottom":""}}' style='animation-delay:0.1s;'>
   <view class="nav-title">扫码登录记录</view>
   <view class="nav-name">Scan Login Log List</view>
   <text class='icon-list'></text>
 </navigator>
+
+<navigator hover-class='none' url="/pages/include/aboutUs" class='nav-li bg-pink shadow {{toggleDelay?"animation-slide-bottom":""}}' style='animation-delay:0.2s;'>
+  <view class="nav-title">关于 生蚝科技</view>
+  <view class="nav-name">About Us(Oyster Tech)</view>
+  <text class='icon-my'></text>
+</navigator>
+
+<view class='{{toggleDelay?"animation-slide-bottom":""}}' style='animation-delay:0.3s;'>
+  <include src="/pages/include/footer" />
+</view>

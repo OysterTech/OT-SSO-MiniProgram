@@ -1,9 +1,7 @@
+var utils = require('../../../utils/util.js');
 const app = getApp();
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
@@ -14,9 +12,10 @@ Page({
 
   },
 
-  toBindUser: function(opt) {
+  toBindUser: function(obj) {
     var _this = this;
-    var formData = opt.detail.value;
+    var formData = obj.detail.value;
+    var formId = obj.detail.formId;
 
     this.setData({
       loading: true
@@ -62,21 +61,30 @@ Page({
       success: function(ret) {
         var ret = ret.data;
         if (ret.code == 200) {
+          var userInfo = ret.data['userInfo'];
+          
 					wx.setStorage({
-						key: 'SSOUnionId',
-						data: ret.data['unionId'],
+            key: 'SSOUnionId',
+						data: userInfo['unionId'],
 					})
 					wx.setStorage({
 						key: 'SSONickName',
-						data: ret.data['nickName'],
+						data: userInfo['nickName'],
 					})
+					wx.setStorage({
+						key: 'SSOUserInfo',
+						data: userInfo,
+					})
+
+					utils.toSendTemplate("V_E-_8brTuJ78NBhHt5KEkUAOSdSxcJwhPKUtHE6FV0", formId, [userInfo['userName'], userInfo['nickName'], '通行证用户', userInfo['phone'], userInfo['email'], utils.getNowDate(), '绑定成功', '使用当前微信账号可直接扫码登录 统一身份认证平台，无需再输入密码']);
+
           wx.showModal({
             title: '温馨提示',
             content: '恭喜您！绑定成功！',
             showCancel: false,
             success: function(res) {
-							console.log(res)
-              if (res.confirm==true) {
+              console.log(res)
+              if (res.confirm == true) {
                 wx.navigateBack({});
               }
             }

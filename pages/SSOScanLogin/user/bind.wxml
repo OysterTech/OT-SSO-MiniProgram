@@ -6,7 +6,7 @@
   </view>
 </view>
 
-<form bindsubmit='toBindUser'>
+<form bindsubmit='toBindUser' report-submit="true">
   <view class="cu-form-group">
     <view class='title'>通行证用户名</view>
     <input placeholder="请输入用户名" class='radius' name='userName' confirm-type='next'></input>

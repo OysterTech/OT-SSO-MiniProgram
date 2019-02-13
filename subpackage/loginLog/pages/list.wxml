@@ -7,8 +7,11 @@
 </view>
 
 <view class="text-center margin-top">
-  <text class='text-green text-xl'>
-		功能正在开发中，敬请期待！\n\n
-		Under development, please look forward to it.
+  <text class='text-green' style='font-size:52rpx'>
+		功能正在开发中，敬请期待\n\n
+		Under development
+		please look forward to it.\n
 	</text>
 </view>
+
+<include src="/pages/include/footer" />

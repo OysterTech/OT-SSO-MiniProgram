@@ -15,14 +15,16 @@
 </view>
 
 <view class="padding-xl">
-  <button class='cu-btn block bg-green margin-tb-sm lg' bindtap='toLogin' loading='{{loading}}' disabled='{{loading}}'> 确认登录</button>
-  <button class='cu-btn block bg-orange margin-tb-sm lg' bindtap='cancelLogin'> 取消授权</button>
+  <form bindsubmit='toLogin' report-submit="true">
+    <button class='cu-btn block bg-green margin-tb-sm lg' form-type="submit" loading='{{loading}}' disabled='{{loading}}'> 确认登录</button>
+  </form>
+  <button class='cu-btn block bg-orange margin-tb-sm lg' bindtap='cancelLogin' disabled='{{loading}}'> 取消授权</button>
 </view>
 
 <view class="cu-modal {{showBindModal==true?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar justify-end">
-      <view class='content'>绑定通行证提醒</view>\
+      <view class='content'>绑定通行证提醒</view>
     </view>
     <view class='padding-xl' style='font-size:40rpx;'>
       当前微信用户暂未绑定SSO通行证，请点击按钮去绑定
@@ -35,3 +37,8 @@
 </view>
 
 <include src="/pages/include/footer" />
+
+<view class='cu-load load-modal' wx:if="{{loading}}"> 
+    <image src='/image/logo.jpg' class='png' mode='aspectFit'></image>
+    <view class='gray-text'>加载中</view>
+</view>

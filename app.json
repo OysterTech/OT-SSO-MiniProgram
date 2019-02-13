@@ -1,16 +1,17 @@
 {
 	"pages": [
 		"pages/SSOScanLogin/index",
-		"pages/user/index",
 		"pages/SSOScanLogin/auth",
-		"pages/SSOScanLogin/bindUser",
+		"pages/SSOScanLogin/user/bind",
+		"pages/SSOScanLogin/user/info",
+		"pages/user/index",
+		"pages/function/index",
 		"pages/include/footer",
-		"pages/user/SSOUserInfo",
-		"pages/function/index"
+		"pages/include/aboutUs"
 	],
 	"subpackages": [
 		{
-			"name":"loginLog",
+			"name": "loginLog",
 			"root": "subpackage/loginLog",
 			"pages": [
 				"pages/list"

@@ -1,0 +1,25 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;padding-top:80px;">
+  <view class="cu-bar fixed gradual-orange" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='icon-back'></text> 关于我们 —— 生蚝科技
+    </navigator>
+  </view>
+</view>
+
+<view class="cu-bar bg-white margin-top">
+  <view class='action'>
+    <text class='icon-title text-blue'></text>关于生蚝科技
+  </view>
+</view>
+<view class='padding bg-white'>
+  <text style='font-size:20px;line-height:30px;'>生蚝科技是由一位广州市初中生（小生蚝）于2014年独自创立的科技企业。\n
+	  主营开发Web项目，为学校信息化建设、体育竞赛编写各类网站或小程序。\n
+		另外还携手几位广州市执信中学高中生共同创立了ITRClub。\n
+		由于资金短缺，无法请他人开发，所以只由小生蚝一人开发。界面、功能等内容可能会有漏洞，敬请谅解！您亦可向我提出建议反馈哦~也希望各位可以资助一下我哈~（提意见请点击下方“联系管理员”）\n
+		下附小生蚝的赞赏码，嘻嘻~（点击放大后长按扫描即可~感谢您的支持哦！一分都是爱哈~）
+	</text>
+</view>
+
+<image src='../../image/supportMe.jpg' bindtap='showZan' style='width:100%;height:320px;'></image>
+
+<include src="/pages/include/footer" />

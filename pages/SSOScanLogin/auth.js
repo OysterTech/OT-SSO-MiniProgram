@@ -1,33 +1,30 @@
+var utils = require('../../utils/util.js');
 const app = getApp();
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     loading: false,
     ticket: "",
     appName: "",
-    showBindModal:"",
-		openId: ""
+    showBindModal: "",
+    openId: ""
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function(options) {
     var _this = this;
     this.setData({
       ticket: options.scene
     })
 
-		// 检查是否已绑定通行证
-		var openId = wx.getStorageSync('openId');
-		if (openId != "") {
+    // 检查是否已绑定通行证
+    var openId = wx.getStorageSync('openId');
+    var unionId = wx.getStorageSync('SSOUnionId');
+    if (unionId != "") {
       _this.setData({
-				openId: openId
+        openId: openId
       })
     } else {
       _this.setData({
@@ -36,7 +33,11 @@ Page({
     }
 
     if (this.data.showBindModal !== true) {
-			// 发送已扫描状态请求
+      _this.setData({
+        loading: true
+      });
+
+      // 发送已扫描状态请求
       wx.request({
         url: app.globalData.apiUrl + "handler",
         header: {
@@ -52,6 +53,10 @@ Page({
           var ret = ret.data;
           var errorContent = '';
           var appName = '';
+
+          _this.setData({
+            loading: false
+          });
 
           if (ret.code == 200) {
             appName = ret.data['appName'];
@@ -91,10 +96,12 @@ Page({
   },
 
 
-  toLogin: function() {
+  toLogin: function(obj) {
     var _this = this;
     var ticket = this.data.ticket;
-		var openId = this.data.openId;
+    var openId = this.data.openId;
+    var formId = obj.detail.formId;
+    var userInfo = wx.getStorageSync('SSOUserInfo');
 
     _this.setData({
       loading: true
@@ -108,7 +115,7 @@ Page({
       data: {
         'mod': 'login',
         'ticket': ticket,
-				'openId': openId
+        'openId': openId
       },
       method: 'post',
       dataType: 'json',
@@ -118,6 +125,7 @@ Page({
 
         if (ret.code == 200) {
           errorContent = '登录成功！\r\n请返回浏览器操作！';
+          utils.toSendTemplate("Ezgd56R9zdvw3SSKKDpS1yY15ox_pdYmvDCR7lDWUs4", formId, [userInfo['userName'], userInfo['nickName'], _this.data.appName, utils.getNowDate(), '登录成功！']);
         } else if (ret.code == 4031) {
           errorContent = '当前用户尚未绑定通行证！';
         } else if (ret.code == 4032) {
@@ -151,10 +159,10 @@ Page({
   },
 
 
-	onUnload:function(){
-		// 点击导航栏返回，取消登录
-		this.cancelLogin();
-	},
+  /*onUnload: function() {
+    // 点击导航栏返回，取消登录
+    this.cancelLogin();
+  },*/
 
 
   cancelLogin: function() {
@@ -175,11 +183,11 @@ Page({
       }
     })
   },
-	
 
-	gotoBindUser:function(){
-		wx.navigateTo({
-			url: '/pages/SSOScanLogin/bindUser',
-		})
-	}
+
+  gotoBindUser: function() {
+    wx.navigateTo({
+      url: '/pages/SSOScanLogin/user/bind',
+    })
+  }
 })

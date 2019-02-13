@@ -1,10 +1,8 @@
 <text>\n\n</text>
 
 <view class="footer">
-    <view class="footer-text">Copyright © 2014-2019 生蚝科技 (V1.0)</view>
-    <!--navigator url='/pages/me/contactMe'>
-        <view class="footer-text" style="color:green">点此联系管理员</view>
-    </navigator-->
+    <view class="footer-text">Copyright © 2014-2019 生蚝科技 (V1.0.0)</view>
+		<button open-type='feedback' size='mini'>点此联系管理员</button>
 </view>
 
 <text>\n</text>

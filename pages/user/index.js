@@ -1,10 +1,11 @@
+var utils = require('../../utils/util.js');
 const app = getApp()
 
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    motto: '欢迎使用 生蚝科技小程序 ~~',
+    motto: '欢迎使用 生蚝科技工具箱小程序 ~~',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -60,6 +61,16 @@ Page({
 
 
   onShow: function() {
+		var _this = this;
+
+		_this.setData({
+			toggleDelay: true
+		})
+		setTimeout(function () {
+			_this.setData({
+				toggleDelay: false
+			})
+		}, 1000)
     if (wx.getStorageSync('SSOUnionId') == "") {
       this.checkHasBindUser();
     }
@@ -85,13 +96,14 @@ Page({
 
   gotoBindUser: function() {
     wx.navigateTo({
-      url: '/pages/SSOScanLogin/bindUser',
+      url: '/pages/SSOScanLogin/user/bind',
     })
   },
 
 
-  cancelBind: function() {
+  cancelBind: function(opt) {
     var _this = this;
+    var formId = opt.detail.formId;
 
     wx.showModal({
       title: '温馨提醒',
@@ -111,19 +123,24 @@ Page({
             success: ret => {
               var ret = ret.data;
               if (ret.code == 200) {
-								wx.removeStorageSync('SSOUnionId');
-								wx.removeStorageSync('SSONickName');
+                var userInfo = wx.getStorageSync('SSOUserInfo');
+                wx.removeStorageSync('SSOUnionId');
+                wx.removeStorageSync('SSONickName');
+                wx.removeStorageSync('SSOUserInfo');
 
                 _this.setData({
                   hasBindUser: false,
                   SSONickName: ''
                 });
-								wx.showToast({
-									title: '成功取消绑定！',
-									icon: 'success',
-									mask: true,
-									duration: 2000
-								})
+
+                utils.toSendTemplate("1FANwbwmmv-Sq0F7VXNz5wR20XLpIyF3HlXN208fQKQ", formId, [userInfo['userName'], userInfo['nickName'], utils.getNowDate(), '解绑成功！期待您再次使用我们的服务！']);
+
+                wx.showToast({
+                  title: '成功取消绑定',
+                  icon: 'success',
+                  mask: true,
+                  duration: 2000
+                })
               } else {
                 wx.showModal({
                   title: '系统提示',
@@ -181,7 +198,7 @@ Page({
 
   showInfo: function() {
     wx.navigateTo({
-      url: '/pages/user/SSOUserInfo',
+      url: '/pages/SSOScanLogin/user/info',
     })
   }
 })

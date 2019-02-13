@@ -15,6 +15,8 @@ Page({
 
   onLoad: function(options) {
     var _this = this;
+		utils.getAccessToken();
+		
     wx.getStorage({
       key: 'openId',
       success(res) {

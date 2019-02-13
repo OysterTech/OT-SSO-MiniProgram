@@ -1,4 +1,6 @@
 //app.js
+// 开工时间：2019-01-25
+
 App({
   globalData: {
     baseUrl: "https://ssouc.xshgzs.com/",
