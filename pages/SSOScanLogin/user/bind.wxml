@@ -11,14 +11,19 @@
     <view class='title'>通行证用户名</view>
     <input placeholder="请输入用户名" class='radius' name='userName' confirm-type='next'></input>
   </view>
-	<view class="cu-form-group">
+  <view class="cu-form-group">
     <view class='title'>通行证密码</view>
     <input placeholder="请输入通行证密码" class='radius' name='password' password='true'></input>
   </view>
 
-	<text>\r\n</text>
+  <text>\r\n</text>
 
-	<button class='flex cu-btn bg-green lg' form-type="submit" disabled='{{loading}}' loading='{{loading}}'>确认绑定 ＞</button>
+  <button class='flex cu-btn bg-green lg' form-type="submit" disabled='{{loading}}' loading='{{loading}}'>确认绑定 ＞</button>
 </form>
 
 <include src="/pages/include/footer" />
+
+<view class='cu-load load-modal' wx:if="{{loading}}">
+  <image src='/image/logo.jpg' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中</view>
+</view>

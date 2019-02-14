@@ -61,7 +61,8 @@ Page({
           if (ret.code == 200) {
             appName = ret.data['appName'];
             _this.setData({
-              appName: appName
+              appName: appName,
+              nickName: wx.getStorageSync('SSONickName')
             });
             return;
           } else if (ret.code == 404) {
@@ -125,6 +126,8 @@ Page({
 
         if (ret.code == 200) {
           errorContent = '登录成功！\r\n请返回浏览器操作！';
+
+          utils.addLoginLog(userInfo['nickName'], _this.data.appName, utils.getNowDate());
           utils.toSendTemplate("Ezgd56R9zdvw3SSKKDpS1yY15ox_pdYmvDCR7lDWUs4", formId, [userInfo['userName'], userInfo['nickName'], _this.data.appName, utils.getNowDate(), '登录成功！']);
         } else if (ret.code == 4031) {
           errorContent = '当前用户尚未绑定通行证！';
@@ -159,10 +162,10 @@ Page({
   },
 
 
-  /*onUnload: function() {
+  onUnload: function() {
     // 点击导航栏返回，取消登录
     this.cancelLogin();
-  },*/
+  },
 
 
   cancelLogin: function() {

@@ -6,19 +6,36 @@
   </view>
 </view>
 
-<view class="margin-xl padding-xl bg-white radius shadow-lg">
+<!-- 提醒 -->
+<view class="bg-pink padding col-1">
+  <text class='icon-warn text-white text-xl' style='line-height:25px;'> 请检查页面显示的昵称是否为本人用户</text>
+</view>
+<!-- ./提醒 -->
+
+<text>\n</text>
+
+<view class="margin padding bg-white shadow-lg">
   <view class="flex justify-center">
     <view class='text-center'>
-      <view class="padding text-grey text-xl">您正在授权登录：{{appName}}</view>
+      <text class='icon-my text-sl'></text>
+      <view class="padding text-grey text-xl">
+        <text style='line-height:30px;'>尊敬的 <text style='font-weight:bold;font-size:45rpx;'>{{nickName}}</text> 用户\n您正在授权登录：{{appName}}
+        </text>
+      </view>
     </view>
   </view>
 </view>
 
-<view class="padding-xl">
+<view class="padding">
   <form bindsubmit='toLogin' report-submit="true">
-    <button class='cu-btn block bg-green margin-tb-sm lg' form-type="submit" loading='{{loading}}' disabled='{{loading}}'> 确认登录</button>
+    <button class='cu-btn block bg-green margin-tb-sm lg' form-type="submit" loading='{{loading}}' disabled='{{loading}}'>
+      <text class='icon-roundcheck text-white'> 确 认 登 录</text>
+    </button>
   </form>
-  <button class='cu-btn block bg-orange margin-tb-sm lg' bindtap='cancelLogin' disabled='{{loading}}'> 取消授权</button>
+  <text>\n</text>
+  <button class='cu-btn block bg-orange margin-tb-sm lg' bindtap='cancelLogin' disabled='{{loading}}'>
+    <text class='icon-roundclose text-white'> 取 消 授 权</text>
+  </button>
 </view>
 
 <view class="cu-modal {{showBindModal==true?'show':''}}">
@@ -38,7 +55,7 @@
 
 <include src="/pages/include/footer" />
 
-<view class='cu-load load-modal' wx:if="{{loading}}"> 
-    <image src='/image/logo.jpg' class='png' mode='aspectFit'></image>
-    <view class='gray-text'>加载中</view>
+<view class='cu-load load-modal' wx:if="{{loading}}">
+  <image src='/image/logo.jpg' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中</view>
 </view>

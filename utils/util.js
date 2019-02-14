@@ -56,6 +56,7 @@ const toSendTemplate = (templateId, formId, data = [], page = "", emphasisKeywor
     return false;
   } else {
     let accessToken = getAccessToken();
+    console.log('sendBianliang', accessToken);
     let openId = wx.getStorageSync('openId');
     var formData = {};
 
@@ -91,7 +92,7 @@ const toSendTemplate = (templateId, formId, data = [], page = "", emphasisKeywor
         if (ret.code == 200) {
           return;
         } else {
-					console.log(ret);
+          console.log(ret);
           wx.showModal({
             title: '系统提示',
             content: '发送服务通知失败！',
@@ -104,10 +105,22 @@ const toSendTemplate = (templateId, formId, data = [], page = "", emphasisKeywor
 }
 
 
+const addLoginLog = (nickName, appName, time) => {
+	let logList = wx.getStorageSync('loginLogList') != "" ? wx.getStorageSync('loginLogList'):[];
+	logList.push([nickName,appName,time]);
+	
+	wx.setStorage({
+		key: 'loginLogList',
+		data: logList
+	})
+}
+
+
 module.exports = {
   formatTime: formatTime,
   formatNumber: formatNumber,
   toSendTemplate: toSendTemplate,
   getNowDate: getNowDate,
-  getAccessToken: getAccessToken
+  getAccessToken: getAccessToken,
+  addLoginLog: addLoginLog
 }

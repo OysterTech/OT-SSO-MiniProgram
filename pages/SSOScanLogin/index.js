@@ -15,8 +15,8 @@ Page({
 
   onLoad: function(options) {
     var _this = this;
-		utils.getAccessToken();
-		
+    utils.getAccessToken();
+
     wx.getStorage({
       key: 'openId',
       success(res) {
@@ -43,33 +43,25 @@ Page({
           navigateUrl = '/' + ret.path;
         }
 
-				if (navigateUrl.substr(0, 24) !='/pages/SSOScanLogin/auth'){
-					wx.showModal({
-						title: '系统提示',
-						content: '无效的二维码！\r\n请扫描系统登录页面的二维码！',
-						showCancel:false
-					});
-					return false;
-				}
+        if (navigateUrl.substr(0, 24) != '/pages/SSOScanLogin/auth') {
+          wx.showModal({
+            title: '系统提示',
+            content: '无效的二维码！\r\n请扫描系统登录页面的二维码！',
+            showCancel: false
+          });
+          return false;
+        }
 
         wx.navigateTo({
-          url: navigateUrl,
-          fail: function(e) {
-            console.log(e);
-            wx.showModal({
-              title: '系统提示',
-							content: '系统跳转失败！\r\n请联系技术支持！',
-              showCancel: false
-            })
-          }
+          url: navigateUrl
         })
       },
+
       fail: function(e) {
-        console.log(e);
         if (e.errMsg != 'scanCode:fail cancel') {
           wx.showModal({
             title: '系统提示',
-						content: '扫码失败！\r\n请重试！',
+            content: '扫码失败！\r\n请重试！',
             showCancel: false
           })
         }
@@ -105,7 +97,7 @@ Page({
             } else {
               wx.showModal({
                 title: '系统提示',
-								content: '服务器接口出错！\r\n请联系技术支持并提供错误码[QR.GPI' + ret.code + ']！',
+                content: '服务器接口出错！\r\n请联系技术支持并提供错误码[QR.GPI' + ret.code + ']！',
                 showCancel: false
               })
             }
@@ -125,10 +117,10 @@ Page({
   },
 
 
-	onShareAppMessage() {
-		return {
-			title: '生蚝科技统一身份认证平台扫码登录',
-			path: '/pages/SSOScanLogin/index'
-		}
-	}
+  onShareAppMessage() {
+    return {
+      title: '生蚝科技统一身份认证平台扫码登录',
+      path: '/pages/SSOScanLogin/index'
+    }
+  }
 })

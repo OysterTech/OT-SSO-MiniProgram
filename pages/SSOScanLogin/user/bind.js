@@ -62,21 +62,21 @@ Page({
         var ret = ret.data;
         if (ret.code == 200) {
           var userInfo = ret.data['userInfo'];
-          
-					wx.setStorage({
-            key: 'SSOUnionId',
-						data: userInfo['unionId'],
-					})
-					wx.setStorage({
-						key: 'SSONickName',
-						data: userInfo['nickName'],
-					})
-					wx.setStorage({
-						key: 'SSOUserInfo',
-						data: userInfo,
-					})
 
-					utils.toSendTemplate("V_E-_8brTuJ78NBhHt5KEkUAOSdSxcJwhPKUtHE6FV0", formId, [userInfo['userName'], userInfo['nickName'], '通行证用户', userInfo['phone'], userInfo['email'], utils.getNowDate(), '绑定成功', '使用当前微信账号可直接扫码登录 统一身份认证平台，无需再输入密码']);
+          wx.setStorage({
+            key: 'SSOUnionId',
+            data: userInfo['unionId'],
+          })
+          wx.setStorage({
+            key: 'SSONickName',
+            data: userInfo['nickName'],
+          })
+          wx.setStorage({
+            key: 'SSOUserInfo',
+            data: userInfo,
+          })
+
+          utils.toSendTemplate("V_E-_8brTuJ78NBhHt5KEkUAOSdSxcJwhPKUtHE6FV0", formId, [userInfo['userName'], userInfo['nickName'], '通行证用户', userInfo['phone'], userInfo['email'], utils.getNowDate(), '绑定成功', '使用当前微信账号可直接扫码登录 统一身份认证平台，无需再输入密码']);
 
           wx.showModal({
             title: '温馨提示',
@@ -93,6 +93,17 @@ Page({
           wx.showModal({
             title: '温馨提示',
             content: '通行证用户名或密码无效！',
+            showCancel: false,
+            complete: function() {
+              _this.setData({
+                loading: false
+              });
+            }
+          });
+        } else {
+          wx.showModal({
+            title: '系统提示',
+            content: '系统错误！\r\n请联系管理员！',
             showCancel: false,
             complete: function() {
               _this.setData({
