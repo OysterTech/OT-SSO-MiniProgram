@@ -87,23 +87,21 @@
   <button class='flex cu-btn bg-blue lg round shadow' style='display:{{editing?"none":""}}' bindtap='editUserInfo'>编 辑 资 料 / 密 码</button>
 
   <view class="flex" style='display:{{editing?"":"none"}}'>
-		<!-- 放弃修改 -->
+    <!-- 放弃修改 -->
     <view class='flex-sub padding-sm margin-xs radius'>
-      <navigator open-type="navigateBack">
-        <button class='flex cu-btn bg-cyan lg shadow' disabled='{{loading}}' loading='{{loading}}'>{{leftSymbol}} 放 弃 修 改</button>
-      </navigator>
+      <button class='flex cu-btn bg-cyan lg shadow' bindtap='discardChange' disabled='{{loading}}' loading='{{loading}}'>{{leftSymbol}} 放 弃 修 改</button>
     </view>
 
- 		<!-- 提交 -->
-   <view class='flex-sub padding-sm margin-xs radius'>
+    <!-- 提交 -->
+    <view class='flex-sub padding-sm margin-xs radius'>
       <button class='flex cu-btn bg-green lg shadow' form-type="submit" disabled='{{loading}}' loading='{{loading}}'>确 认 修 改 ></button>
     </view>
   </view>
 </form>
 
-<view class='cu-load load-modal' wx:if="{{loading}}"> 
-    <image src='/image/logo.jpg' class='png' mode='aspectFit'></image>
-    <view class='gray-text'>加载中</view>
+<view class='cu-load load-modal' wx:if="{{loading}}">
+  <image src='/image/logo.jpg' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中</view>
 </view>
 
 <include src="/pages/include/footer" />

@@ -132,7 +132,7 @@ Page({
               let tips = updateFieldCNName.indexOf('密码') != -1 ? '下次于网页登录请使用新密码！' : '';
               tips += '如非本人操作，请及时联系管理员！';
 
-              utils.toSendTemplate('fVA8fXAWg6X2Oieex5HKMdBIBFzNR80r7iYTGOrHkq4', formId, [updateFieldCNName, wechatNickName + '于' + utils.getNowDate() + '成功修改资料', tips], '/pages/user/index');
+              utils.toSendTemplate('fVA8fXAWg6X2Oieex5HKMd8kgLIox4iyxaRw5yDFodU', formId, [updateFieldCNName, wechatNickName + ' 成功修改资料', utils.getNowDate(), tips], '/pages/user/index');
 
               setTimeout(function() {
                 wx.navigateBack({})
@@ -185,5 +185,12 @@ Page({
         showCancel: false
       })
     }, time);
+  },
+
+
+  discardChange: function() {
+    this.setData({
+      editing: false
+    })
   }
 })

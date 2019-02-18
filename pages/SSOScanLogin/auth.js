@@ -80,7 +80,9 @@ Page({
             content: errorContent,
             showCancel: false,
             success() {
-              wx.navigateBack({});
+              wx.switchTab({
+                url: '/pages/SSOScanLogin/index',
+              })
             }
           })
         },
@@ -89,7 +91,12 @@ Page({
           wx.showModal({
             title: '系统提示',
             content: '服务器获取二维码信息失败！请重试！',
-            showCancel: false
+            showCancel: false,
+            success() {
+              wx.switchTab({
+                url: '/pages/SSOScanLogin/index',
+              })
+            }
           })
         }
       })
@@ -127,8 +134,9 @@ Page({
         if (ret.code == 200) {
           errorContent = '登录成功！\r\n请返回浏览器操作！';
 
+          utils.getAccessToken();
           utils.addLoginLog(userInfo['nickName'], _this.data.appName, utils.getNowDate());
-          utils.toSendTemplate("Ezgd56R9zdvw3SSKKDpS1yY15ox_pdYmvDCR7lDWUs4", formId, [userInfo['userName'], userInfo['nickName'], _this.data.appName, utils.getNowDate(), '登录成功！']);
+          utils.toSendTemplate("Ezgd56R9zdvw3SSKKDpS1yY15ox_pdYmvDCR7lDWUs4", formId, [userInfo['userName'], userInfo['nickName'], _this.data.appName, utils.getNowDate(), '登录成功！'], 'subpackage/loginLog/pages/list');
         } else if (ret.code == 4031) {
           errorContent = '当前用户尚未绑定通行证！';
         } else if (ret.code == 4032) {
@@ -139,12 +147,18 @@ Page({
           errorContent = '系统错误！\r\n请联系技术支持！';
         }
 
+        _this.setData({
+          loading: false
+        })
+
         wx.showModal({
           title: '系统提示',
           content: errorContent,
           showCancel: false,
           success() {
-            wx.navigateBack({});
+            wx.switchTab({
+              url: '/pages/SSOScanLogin/index',
+            })
           }
         })
       },
@@ -182,7 +196,9 @@ Page({
       method: 'post',
       dataType: 'json',
       complete: function(ret) {
-        wx.navigateBack({});
+        wx.switchTab({
+          url: '/pages/SSOScanLogin/index',
+        })
       }
     })
   },

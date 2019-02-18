@@ -76,7 +76,7 @@ Page({
             data: userInfo,
           })
 
-          utils.toSendTemplate("V_E-_8brTuJ78NBhHt5KEkUAOSdSxcJwhPKUtHE6FV0", formId, [userInfo['userName'], userInfo['nickName'], '通行证用户', userInfo['phone'], userInfo['email'], utils.getNowDate(), '绑定成功', '使用当前微信账号可直接扫码登录 统一身份认证平台，无需再输入密码']);
+          utils.toSendTemplate("V_E-_8brTuJ78NBhHt5KEkUAOSdSxcJwhPKUtHE6FV0", formId, [userInfo['userName'], userInfo['nickName'], '通行证用户', userInfo['phone'], userInfo['email'], utils.getNowDate(), '绑定成功', '使用当前微信账号可直接扫码登录 统一身份认证平台，无需再输入密码'], 'pages/SSOScanLogin/index');
 
           wx.showModal({
             title: '温馨提示',
