@@ -14,6 +14,7 @@ Page({
 
 
   onLoad: function(options) {
+    utils.getAccessToken();
     var _this = this;
     this.setData({
       ticket: options.scene
@@ -134,7 +135,6 @@ Page({
         if (ret.code == 200) {
           errorContent = '登录成功！\r\n请返回浏览器操作！';
 
-          utils.getAccessToken();
           utils.addLoginLog(userInfo['nickName'], _this.data.appName, utils.getNowDate());
           utils.toSendTemplate("Ezgd56R9zdvw3SSKKDpS1yY15ox_pdYmvDCR7lDWUs4", formId, [userInfo['userName'], userInfo['nickName'], _this.data.appName, utils.getNowDate(), '登录成功！'], 'subpackage/loginLog/pages/list');
         } else if (ret.code == 4031) {

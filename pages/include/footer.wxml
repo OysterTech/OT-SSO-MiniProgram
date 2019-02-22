@@ -1,7 +1,7 @@
 <text>\n\n</text>
 
 <view class="footer">
-    <view class="footer-text">Copyright © 2014-2019 生蚝科技 (V1.1.0)</view>
+    <view class="footer-text">Copyright © 2014-2019 生蚝科技 (V1.1.2)</view>
 		<button open-type='feedback' size='mini'>点此联系管理员</button>
 </view>
 

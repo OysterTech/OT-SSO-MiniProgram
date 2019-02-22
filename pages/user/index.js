@@ -5,7 +5,7 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    motto: '欢迎使用 生蚝科技工具箱小程序 ~~',
+    motto: '',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -13,6 +13,20 @@ Page({
   },
 
   onLoad: function() {
+    var _this = this;
+    wx.request({
+      url: 'https://v1.hitokoto.cn',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      dataType: 'json',
+      success: ret => {
+        var ret = ret.data;
+        _this.setData({
+          motto: ret.hitokoto
+        });
+      }
+    })
     if (wx.getStorageSync('userInfo') != "") {
       this.setData({
         userInfo: wx.getStorageSync('userInfo'),
@@ -61,16 +75,16 @@ Page({
 
 
   onShow: function() {
-		var _this = this;
+    var _this = this;
 
-		_this.setData({
-			toggleDelay: true
-		})
-		setTimeout(function () {
-			_this.setData({
-				toggleDelay: false
-			})
-		}, 1000)
+    _this.setData({
+      toggleDelay: true
+    })
+    setTimeout(function() {
+      _this.setData({
+        toggleDelay: false
+      })
+    }, 1000)
     if (wx.getStorageSync('SSOUnionId') == "") {
       this.checkHasBindUser();
     }
@@ -161,6 +175,18 @@ Page({
   checkHasBindUser: function() {
     var _this = this;
 
+    wx.getStorage({
+      key: 'openId',
+      success(res) {
+        if (res.data == null || res.data == "") {
+          _this.loginToGetOpenId();
+        }
+      },
+      fail(e) {
+        _this.loginToGetOpenId();
+      }
+    })
+
     wx.request({
       url: app.globalData.apiUrl + "getUserInfo",
       header: {
@@ -200,5 +226,47 @@ Page({
     wx.navigateTo({
       url: '/pages/SSOScanLogin/user/info',
     })
-  }
+  },
+
+
+  loginToGetOpenId: function() {
+    wx.login({
+      success(res) {
+        wx.request({
+          url: app.globalData.apiUrl + 'getOpenId',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            'code': res.code
+          },
+          dataType: 'json',
+          success: function(ret) {
+            ret = ret.data;
+            if (ret.code == 200) {
+              wx.setStorage({
+                key: 'openId',
+                data: ret.data['openId']
+              })
+            } else if (ret.code == 500) {
+              wx.showModal({
+                title: '系统提示',
+                content: '获取用户信息失败！',
+                showCancel: false
+              })
+            } else {
+              wx.showModal({
+                title: '系统提示',
+                content: '服务器接口出错！\r\n请联系技术支持并提供错误码[QR.GPI' + ret.code + ']！',
+                showCancel: false
+              })
+            }
+          },
+          fail: function(e) {
+            console.log(e)
+          }
+        })
+      }
+    })
+  },
 })

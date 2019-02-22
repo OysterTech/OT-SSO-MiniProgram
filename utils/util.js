@@ -22,9 +22,8 @@ const getNowDate = () => {
 }
 
 
-const getAccessToken = () => {
+const makeAccessToken = () => {
   let storage = wx.getStorageSync('accessToken');
-
   if (storage == "" || storage[0] == "" || storage[1] <= (Date.parse(new Date()) / 1000)) {
     wx.request({
       url: app.globalData.apiUrl + 'getAccessToken/api',
@@ -46,6 +45,21 @@ const getAccessToken = () => {
 }
 
 
+const getAccessToken = () => {
+  let at = makeAccessToken();
+
+  if (at == "") {
+    let storage = wx.getStorageSync('accessToken');
+
+    if (storage == "" || storage[0] == "" || storage[1] <= (Date.parse(new Date()) / 1000)) {
+      at = storage[0];
+    }
+  }
+
+  return at;
+}
+
+
 const toSendTemplate = (templateId, formId, data = [], page = "", emphasisKeyword = "") => {
   if (templateId == "" || formId == "") {
     wx.showModal({
@@ -56,7 +70,6 @@ const toSendTemplate = (templateId, formId, data = [], page = "", emphasisKeywor
     return false;
   } else {
     let accessToken = getAccessToken();
-    console.log('sendBianliang', accessToken);
     let openId = wx.getStorageSync('openId');
     var formData = {};
 
@@ -106,13 +119,13 @@ const toSendTemplate = (templateId, formId, data = [], page = "", emphasisKeywor
 
 
 const addLoginLog = (nickName, appName, time) => {
-	let logList = wx.getStorageSync('loginLogList') != "" ? wx.getStorageSync('loginLogList'):[];
-	logList.push([nickName,appName,time]);
-	
-	wx.setStorage({
-		key: 'loginLogList',
-		data: logList
-	})
+  let logList = wx.getStorageSync('loginLogList') != "" ? wx.getStorageSync('loginLogList') : [];
+  logList.push([nickName, appName, time]);
+
+  wx.setStorage({
+    key: 'loginLogList',
+    data: logList
+  })
 }
 
 
